@@ -1,0 +1,48 @@
+﻿@model web.Models.Employee
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<h2>Employee Details</h2>
+<div style="width:90%; margin:0 auto;">
+    <table id="myTable">
+        <thead>
+            <tr>
+                <th>Emp_Id </th>
+                <th>Emp_Name</th>
+                <th>Emp_Department</th>
+                <th>MonthlySalary</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+<style>
+    tr.even {
+        background-color: #F5F5F5 !important;
+    }
+</style>
+@* Load datatable css *@
+<link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />
+@* Load datatable js *@
+@section Scripts{
+    <script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                "ajax": {
+                    "url": "/Employee/loaddata",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "columns" : [
+                    { "data": "Emp_Id", "autoWidth": true },
+                    { "data": "Emp_Name", "autoWidth": true },
+                    { "data": "Emp_Department", "autoWidth": true },
+                    { "data": "MonthlySalary", "autoWidth": true },
+                    ]
+            });
+        });
+    </script>
+}
